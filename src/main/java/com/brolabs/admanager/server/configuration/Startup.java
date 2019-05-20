@@ -1,7 +1,9 @@
 package com.brolabs.admanager.server.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,11 +11,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Startup {
 
+    @Autowired
+    private ServerProperties serverProperties;
+
     @Bean
     public CommandLineRunner afterStart() {
         return args -> {
-              log.info("To view UI go to http://localhost:8090");
-              log.info("API available at http://localhost:8090/swagger-ui.html");
+            int port = serverProperties.getPort();
+            log.info("To view UI go to http://localhost:{}", port);
+            log.info("API available at http://localhost:{}/swagger-ui.html", port);
         };
     }
 }
