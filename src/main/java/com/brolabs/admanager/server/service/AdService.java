@@ -17,7 +17,8 @@ public class AdService {
 
     @PostConstruct
     public void init() {
-        Map<String, Ad> adsOfPoint = new HashMap<>();
+        Map<String, Ad> adsOfPoint1 = new HashMap<>();
+        Map<String, Ad> adsOfPoint2 = new HashMap<>();
 
         AdSettings settings = new AdSettings();
         settings.setDateStart(LocalDate.of(2019, Month.MAY, 10));
@@ -27,7 +28,8 @@ public class AdService {
         ad.setSettings(settings);
         ad.setType(AdType.VIDEO_MP4);
         ad.setUrl("/resources/10000_2s39jf9e8uf.mp4");
-        adsOfPoint.put(ad.getId(), ad);
+        adsOfPoint1.put(ad.getId(), ad);
+        adsOfPoint2.put(ad.getId(), ad);
 
         settings = new AdSettings();
         settings.setDateStart(LocalDate.of(2019, Month.MAY, 19));
@@ -37,9 +39,10 @@ public class AdService {
         ad.setSettings(settings);
         ad.setType(AdType.IMAGE_JPG);
         ad.setUrl("/resources/10001_8jf29jf92asSd.jpg");
-        adsOfPoint.put(ad.getId(), ad);
+        adsOfPoint1.put(ad.getId(), ad);
 
-        ads.put("1000", adsOfPoint);
+        ads.put("1000", adsOfPoint1);
+        ads.put("2000", adsOfPoint2);
     }
 
     public List<Ad> getAds(String pointId) {

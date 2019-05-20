@@ -3,10 +3,7 @@ package com.brolabs.admanager.server.controller;
 import com.brolabs.admanager.server.model.AdPoint;
 import com.brolabs.admanager.server.service.AdPointService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,11 @@ public class AdPointController {
     @GetMapping("/adpoints/{pointId}")
     public AdPoint getPoint(@PathVariable String pointId) {
         return adPointService.getAdPoint(pointId);
+    }
+
+    @PostMapping("/adpoints")
+    public AdPoint addPoint(@RequestBody AdPoint point) {
+        return adPointService.create(point);
     }
 
 }

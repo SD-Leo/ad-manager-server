@@ -1,7 +1,6 @@
 package com.brolabs.admanager.server.service;
 
 import com.brolabs.admanager.server.exception.NotFoundAdPoint;
-import com.brolabs.admanager.server.exception.NotFoundOrganization;
 import com.brolabs.admanager.server.model.AdPoint;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +19,14 @@ public class AdPointService {
                 .id("1000")
                 .name("First ad point")
                 .ad("10000")
+                .ad("10001")
+                .build();
+        adpoints.put(adPoint.getId(), adPoint);
+        adPoint = AdPoint.builder()
+                .organizationId("222")
+                .id("2000")
+                .name("ad point 2")
+                .ad("10000")
                 .build();
         adpoints.put(adPoint.getId(), adPoint);
     }
@@ -31,22 +38,21 @@ public class AdPointService {
         return adpoints.get(adPointId);
     }
 
-    public AdPoint create(String organizationId, AdPoint point) {
-        String id = UUID.randomUUID().toString();
+    public AdPoint create(AdPoint point) {
+        Random rnd = new Random();
+        String id = String.valueOf(rnd.nextInt(900) + 100);
         point.setId(id);
-        point.setOrganizationId(organizationId);
+        adpoints.put(point.getOrganizationId(), point);
         return point;
     }
 
-    public AdPoint deleteAdPoint(String organizationId, String adPointId) {
-        Map<String, AdPoint> organizationPoints = adpoints;
-        if (organizationPoints == null) {
-            throw new NotFoundOrganization();
-        }
-        AdPoint adPoint = organizationPoints.get(adPointId);
+    public AdPoint delete(String adPointId) {
+
+        AdPoint adPoint = adpoints.get(adPointId);
         if (adPoint == null) {
             throw new NotFoundAdPoint();
         }
+        adpoints.remove(adPointId);
         return adPoint;
     }
 
