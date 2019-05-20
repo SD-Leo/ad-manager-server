@@ -1,2 +1,6 @@
 server:
   port: 8090
+
+logging:
+  pattern:
+    console: "%date{HH:mm:ss.SSS} %highlight[%-5level] %cyan(%-55logger{55}) - %msg%n"
