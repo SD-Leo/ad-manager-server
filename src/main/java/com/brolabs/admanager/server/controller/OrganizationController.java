@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/organizations")
+@RequestMapping("/api/organizations")
 public class OrganizationController {
 
     @Autowired

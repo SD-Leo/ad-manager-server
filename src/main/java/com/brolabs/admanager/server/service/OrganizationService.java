@@ -14,22 +14,22 @@ public class OrganizationService {
     @PostConstruct
     private void init() {
         Organization organization = new Organization();
-        organization.setId("f25fed1b-7ccc-442b-863a-362f8502137b");
+        organization.setId("111");
         organization.setName("Google");
         database.put(organization.getId(), organization);
 
         organization = new Organization();
-        organization.setId("269ebee6-22a3-4ad0-bc6b-87282e46a049");
+        organization.setId("222");
         organization.setName("Facebook");
         database.put(organization.getId(), organization);
 
         organization = new Organization();
-        organization.setId("bcfd775b-494a-4673-98d4-127d4082a39b");
+        organization.setId("333");
         organization.setName("Amazon");
         database.put(organization.getId(), organization);
 
         organization = new Organization();
-        organization.setId("35aad015-4c5d-478e-8f7d-4ebb1b5a1434");
+        organization.setId("444");
         organization.setName("Apple");
         database.put(organization.getId(), organization);
 

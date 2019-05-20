@@ -10,4 +10,7 @@ public class Ad {
     private AdType type;
 
     private String url;
+
+    private AdSettings settings;
+
 }

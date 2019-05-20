@@ -1,5 +1,5 @@
 
-var api = new Vue.resource('/organizations{/id}');
+var api = new Vue.resource('/api/organizations{/id}');
 
 Vue.component('my-form', {
     props: ['organizations'],
