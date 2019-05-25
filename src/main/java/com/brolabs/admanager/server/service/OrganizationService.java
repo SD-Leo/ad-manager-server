@@ -13,52 +13,30 @@ public class OrganizationService {
 
     @PostConstruct
     private void init() {
-        Organization organization = new Organization();
-        organization.setId("111");
-        organization.setName("Google");
-        database.put(organization.getId(), organization);
+        Organization org1 = Organization
+            .builder()
+            .id("org-1")
+            .name("Facebook")
+            .ad("ad-1")
+            .ad("ad-2")
+            .build();
 
-        organization = new Organization();
-        organization.setId("222");
-        organization.setName("Facebook");
-        database.put(organization.getId(), organization);
-
-        organization = new Organization();
-        organization.setId("333");
-        organization.setName("Amazon");
-        database.put(organization.getId(), organization);
-
-        organization = new Organization();
-        organization.setId("444");
-        organization.setName("Apple");
-        database.put(organization.getId(), organization);
-
-//
-//        10e31f32-20cc-4df4-94fe-0e3b3eac31c0
-//        9a28bcb8-9e02-471c-9d40-70c57ec57bcf
-//        System.out.println(UUID.randomUUID().toString());
-    }
-
-
-    public List<Organization> getAllOrganizations() {
-        return new ArrayList<>(database.values());
+        database.put(org1.getId(), org1);
     }
 
     public Organization getOrganization(String id) {
         return database.get(id);
     }
 
+    public List<Organization> getAllOrganizations() {
+        return new ArrayList<>(database.values());
+    }
+
     public Organization addOrganization(Organization organization) {
-        String id = UUID.randomUUID().toString();
-        organization.setId(id);
-        database.put(id, organization);
+        organization.setId(UUID.randomUUID().toString());
+        database.put(organization.getId(), organization);
         return organization;
     }
-
-    public Organization deleteOrganization(String id) {
-        return database.remove(id);
-    }
-
 
     public Organization updateOrganization(String id, Organization organization) {
         if (!database.containsKey(id)) {
@@ -67,5 +45,9 @@ public class OrganizationService {
         organization.setId(id);
         database.put(id, organization);
         return organization;
+    }
+
+    public Organization deleteOrganization(String id) {
+        return database.remove(id);
     }
 }
