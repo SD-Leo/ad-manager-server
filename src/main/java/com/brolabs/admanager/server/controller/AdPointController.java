@@ -21,7 +21,7 @@ public class AdPointController {
 
     @GetMapping("/adpoints/{pointId}")
     public AdPoint getPoint(@PathVariable String pointId) {
-        return adPointService.getAdPoint(pointId);
+        return adPointService.getPoint(pointId);
     }
 
     @PostMapping("/adpoints")
