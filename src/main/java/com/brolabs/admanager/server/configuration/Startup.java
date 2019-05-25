@@ -1,7 +1,6 @@
 package com.brolabs.admanager.server.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Startup {
 
-    @Autowired
-    private ServerProperties serverProperties;
+    private final ServerProperties serverProperties;
+
+    public Startup(ServerProperties serverProperties) {
+        this.serverProperties = serverProperties;
+    }
 
     @Bean
     public CommandLineRunner afterStart() {

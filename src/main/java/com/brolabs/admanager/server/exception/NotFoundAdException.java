@@ -4,17 +4,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class NotFoundOrganization extends RuntimeException {
+public class NotFoundAdException extends RuntimeException {
 
-    public NotFoundOrganization() {
-        this("Organization is not found");
+    public NotFoundAdException() {
+        this("Advertisement point is not found");
     }
 
-    public NotFoundOrganization(String message) {
+    public NotFoundAdException(String message) {
         super(message);
     }
 
-    public NotFoundOrganization(String message, Throwable cause) {
+    public NotFoundAdException(String message, Throwable cause) {
         super(message, cause);
     }
+
 }
