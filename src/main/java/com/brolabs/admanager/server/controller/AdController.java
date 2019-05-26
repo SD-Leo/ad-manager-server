@@ -1,6 +1,6 @@
 package com.brolabs.admanager.server.controller;
 
-import com.brolabs.admanager.server.model.AdDeviceResponse;
+import com.brolabs.admanager.server.model.AdResponse;
 import com.brolabs.admanager.server.service.AdService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class AdController {
 //    private CampaignService campaignService;
 
     @GetMapping("/ads")
-    public AdDeviceResponse getAds(@RequestParam("token") String token) {
-        AdDeviceResponse response = adService.getAds(token);
+    public AdResponse getAds(@RequestParam("token") String token) {
+        AdResponse response = adService.getAds(token);
         log.info("Get ads for token: {}", token);
         return response;
     }

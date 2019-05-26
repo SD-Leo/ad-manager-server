@@ -16,7 +16,7 @@ public class Campaign {
 
     private String id;
 
-    private AdSettings settings;
+//    private AdSettings settings;
 
     /**
      * Список точек показа рекламы, которые

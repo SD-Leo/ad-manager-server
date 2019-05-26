@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Data
 @Builder
-public class AdDeviceResponse {
+public class AdResponse {
 
     private AdSettings settings;
 

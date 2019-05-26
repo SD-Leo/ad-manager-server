@@ -1,56 +1,35 @@
 package com.brolabs.admanager.server.service;
 
-import com.brolabs.admanager.server.model.AdSettings;
+import com.brolabs.admanager.server.exception.NotFoundAdException;
+import com.brolabs.admanager.server.model.AdPoint;
 import com.brolabs.admanager.server.model.Campaign;
+import com.brolabs.admanager.server.repo.AdCampaignRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CampaignService {
 
-    HashMap<String, Campaign> database = new HashMap<>();
+    @Autowired
+    private AdCampaignRepository repository;
 
-    @PostConstruct
-    public void init() {
-        Campaign campaign1 = Campaign
-            .builder()
-            .id("campaign-1")
-            .settings(AdSettings
-                .builder()
-                .dateStart(LocalDate.of(2019, 5, 10))
-                .dateEnd(LocalDate.of(2019, 8, 20))
-                .build())
-            .ad("ad-1")
-            .point("point-1")
-            .point("point-2")
-            .build();
-
-        Campaign campaign2 = Campaign
-            .builder()
-            .id("campaign-2")
-            .settings(AdSettings
-                .builder()
-                .dateStart(LocalDate.of(2019, 5, 10))
-                .dateEnd(LocalDate.of(2019, 8, 20))
-                .build())
-            .ad("ad-2")
-            .point("point-1")
-            .build();
-
-        database.put(campaign1.getId(), campaign1);
-        database.put(campaign2.getId(), campaign2);
+    public List<Campaign> getCampaigns() {
+        return repository.findAll();
     }
 
     public Campaign getCampaign(String id) {
-        return database.get(id);
+        Optional<Campaign> opt = repository.findById(id);
+        if (!opt.isPresent()) {
+            throw new NotFoundAdException("Campaign is not found");
+        }
+        return opt.get();
     }
 
-    public List<Campaign> getCampaigns() {
-        return new ArrayList<>(database.values());
+    public List<Campaign> getCampaigns(AdPoint adPoint) {
+        return repository.findCampaignsByPointsIn(adPoint.getToken());
     }
+
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 public class AdPoint {
 
-    private String id;
+    private String token;
 
     private String name;
 
