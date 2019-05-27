@@ -44,6 +44,10 @@ public class SetUpDatabaseConfiguration {
     @Bean
     public CommandLineRunner populateDatabase() {
         return args -> {
+            adRepository.deleteAll();
+            adPointRepository.deleteAll();
+            adSettingsRepository.deleteAll();
+            adCampaignRepository.deleteAll();
             log.info("Init database data");
             Ad ad1 = Ad.builder()
                 .id("ad-1")

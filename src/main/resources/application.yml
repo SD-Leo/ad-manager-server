@@ -4,3 +4,15 @@ server:
 logging:
   pattern:
     console: "%date{HH:mm:ss.SSS} %highlight[%-5level] %cyan(%-55logger{55}) - %msg%n"
+
+
+spring:
+  data:
+    mongodb:
+      host: ds261716.mlab.com
+      port: 61716
+      database: ad-manager
+      username: user
+      password: eA:M_8g5ne
+#      uri: mongodb://<dbuser>:<dbpassword>@ds261716.mlab.com:61716/ad-manager
+
