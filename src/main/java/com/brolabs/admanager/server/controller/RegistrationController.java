@@ -3,10 +3,7 @@ package com.brolabs.admanager.server.controller;
 import com.brolabs.admanager.server.model.AdPoint;
 import com.brolabs.admanager.server.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 2019-05-25
@@ -17,15 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class RegistrationController {
 
+    private final RegistrationService registrationService;
+
     @Autowired
-    private RegistrationService registrationService;
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
 
     @PostMapping("/register")
     public AdPoint register(@RequestParam("code") String code) {
-        AdPoint adPoint = AdPoint.builder()
-            .token(registrationService.register(code))
-            .build();
-        return adPoint;
+        return registrationService.register(code);
+    }
+
+    @PostMapping("/register/generate/{pointId}")
+    public String generateCode(@PathVariable String pointId) {
+        return registrationService.generateCode(pointId);
     }
 
 }

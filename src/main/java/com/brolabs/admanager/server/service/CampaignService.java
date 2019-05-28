@@ -29,7 +29,7 @@ public class CampaignService {
     }
 
     public List<Campaign> getCampaigns(AdPoint adPoint) {
-        return repository.findCampaignsByPointsIn(adPoint.getToken());
+        return repository.findCampaignsByPointsIn(adPoint.getId());
     }
 
 }

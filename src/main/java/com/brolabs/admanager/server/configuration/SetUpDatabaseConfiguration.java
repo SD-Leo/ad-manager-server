@@ -66,13 +66,15 @@ public class SetUpDatabaseConfiguration {
 
             AdPoint point1 = AdPoint
                 .builder()
-                .token("point-1")
+                .id("ad-point-id-111")
+//                .token("point-1") // token is null because point is unregistered
                 .name("Point 1")
                 .build();
 
             AdPoint point2 = AdPoint
                 .builder()
-                .token("point-2")
+                .id("ad-point-id-222")
+//                .token("point-2") // token is null because point is unregistered
                 .name("Point 2")
                 .build();
             adPointRepository.save(point1);
@@ -90,15 +92,15 @@ public class SetUpDatabaseConfiguration {
                 .builder()
                 .id("campaign-1")
                 .ad(ad1.getId())
-                .point(point1.getToken())
-                .point(point2.getToken())
+                .point(point1.getId())
+                .point(point2.getId())
                 .build();
 
             Campaign campaign2 = Campaign
                 .builder()
                 .id("campaign-2")
                 .ad(ad2.getId())
-                .point(point1.getToken())
+                .point(point1.getId())
                 .build();
 
             adCampaignRepository.save(campaign1);

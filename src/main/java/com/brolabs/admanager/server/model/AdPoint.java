@@ -2,6 +2,7 @@ package com.brolabs.admanager.server.model;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 
 /**
@@ -10,6 +11,9 @@ import lombok.Data;
 @Data
 @Builder
 public class AdPoint {
+
+    @Id
+    private String id;
 
     private String token;
 
