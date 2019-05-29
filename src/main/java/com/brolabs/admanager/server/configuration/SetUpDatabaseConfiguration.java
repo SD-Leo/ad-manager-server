@@ -4,10 +4,7 @@ import com.brolabs.admanager.server.model.Ad;
 import com.brolabs.admanager.server.model.AdPoint;
 import com.brolabs.admanager.server.model.AdSettings;
 import com.brolabs.admanager.server.model.Campaign;
-import com.brolabs.admanager.server.repo.AdCampaignRepository;
-import com.brolabs.admanager.server.repo.AdPointRepository;
-import com.brolabs.admanager.server.repo.AdRepository;
-import com.brolabs.admanager.server.repo.AdSettingsRepository;
+import com.brolabs.admanager.server.repo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,6 +38,9 @@ public class SetUpDatabaseConfiguration {
     @Autowired
     private AdCampaignRepository adCampaignRepository;
 
+    @Autowired
+    private RegCodeRepository regCodeRepository;
+
     @Bean
     public CommandLineRunner populateDatabase() {
         return args -> {
@@ -48,6 +48,7 @@ public class SetUpDatabaseConfiguration {
             adPointRepository.deleteAll();
             adSettingsRepository.deleteAll();
             adCampaignRepository.deleteAll();
+            regCodeRepository.deleteAll();
             log.info("Init database data");
             Ad ad1 = Ad.builder()
                 .id("ad-1")
@@ -81,16 +82,22 @@ public class SetUpDatabaseConfiguration {
             adPointRepository.save(point2);
 
 
-            AdSettings settings = AdSettings
+            AdSettings settings1 = AdSettings
                 .builder()
                 .dateStart(LocalDate.of(2019, Month.MAY, 10))
                 .dateEnd(LocalDate.of(2019, Month.AUGUST, 20))
                 .build();
-            adSettingsRepository.save(settings);
+            AdSettings settings2 = AdSettings
+                .builder()
+                .dateStart(LocalDate.of(2019, Month.MAY, 1))
+                .dateEnd(LocalDate.of(2019, Month.AUGUST, 1))
+                .build();
+
 
             Campaign campaign1 = Campaign
                 .builder()
                 .id("campaign-1")
+                .settings(settings1)
                 .ad(ad1.getId())
                 .point(point1.getId())
                 .point(point2.getId())
@@ -99,6 +106,7 @@ public class SetUpDatabaseConfiguration {
             Campaign campaign2 = Campaign
                 .builder()
                 .id("campaign-2")
+                .settings(settings2)
                 .ad(ad2.getId())
                 .point(point1.getId())
                 .build();

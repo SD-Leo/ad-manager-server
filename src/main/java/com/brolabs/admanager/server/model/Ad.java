@@ -17,4 +17,6 @@ public class Ad {
 
     private String url;
 
+    private AdSettings settings;
+
 }

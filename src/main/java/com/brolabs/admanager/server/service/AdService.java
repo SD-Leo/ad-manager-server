@@ -1,9 +1,11 @@
 package com.brolabs.admanager.server.service;
 
-import com.brolabs.admanager.server.model.*;
+import com.brolabs.admanager.server.model.Ad;
+import com.brolabs.admanager.server.model.AdPoint;
+import com.brolabs.admanager.server.model.AdResponse;
+import com.brolabs.admanager.server.model.Campaign;
 import com.brolabs.admanager.server.repo.AdPointRepository;
 import com.brolabs.admanager.server.repo.AdRepository;
-import com.brolabs.admanager.server.repo.AdSettingsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,8 @@ public class AdService {
     @Autowired
     private AdPointRepository adPointRepository;
 
-    @Autowired
-    private AdSettingsRepository adSettingsRepository;
+//    @Autowired
+//    private AdSettingsRepository adSettingsRepository;
 
     @Autowired
     private CampaignService campaignService;
@@ -31,14 +33,16 @@ public class AdService {
         AdPoint adPoint = adPointRepository.findAdPointByToken(token);
         List<Campaign> campaigns = campaignService.getCampaigns(adPoint);
         log.info("Campaigns: {}", campaigns);
-        AdSettings settings = adSettingsRepository.findAll().get(0);
+//        AdSettings settings = adSettingsRepository.findAll().get(0);
 
-        List<String> adIds = new ArrayList<>();
-        campaigns.forEach(campaign -> adIds.addAll(campaign.getAds()));
-        List<Ad> ads = findAds(adIds);
+        List<Ad> ads = new ArrayList<>();
+        campaigns.forEach(campaign -> {
+            List<Ad> adList = findAds(campaign.getAds());
+            adList.forEach(ad -> ad.setSettings(campaign.getSettings()));
+            ads.addAll(adList);
+        });
 
         return AdResponse.builder()
-            .settings(settings)
             .ads(ads)
             .build();
     }

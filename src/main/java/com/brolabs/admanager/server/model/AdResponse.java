@@ -15,8 +15,6 @@ import java.util.List;
 @Builder
 public class AdResponse {
 
-    private AdSettings settings;
-
     @Singular
     private List<Ad> ads;
 
