@@ -31,7 +31,7 @@ Vue.component('app-view', {
     '<div>' +
       '<my-form :organizations="organizations"/>' +
       '<div v-for="org in organizations">{{ org.name }}</div>' +
-      '<input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>' +
+      '<input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>' + // https://serversideup.net/uploading-files-vuejs-axios/
       '<div>' +
         '<button v-on:click="submitFile()">Upload file</button>' +
       '</div>' +
