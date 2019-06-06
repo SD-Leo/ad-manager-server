@@ -17,25 +17,10 @@ public class AdController {
     @Autowired
     private AdService adService;
 
-//    @Autowired
-//    private CampaignService campaignService;
-
     @GetMapping("/ads")
     public AdResponse getAds(@RequestParam("token") String token) {
         AdResponse response = adService.getAds(token);
         log.info("Get ads for token: {}", token);
         return response;
     }
-//    public List<Ad> getAdsOfPoint(@PathVariable String adpoint) {
-//        List<Campaign> campaigns = campaignService.getCampaigns();
-//        List<Ad> ads = new ArrayList<>();
-//        for (Campaign campaign : campaigns) {
-//            if (campaign.getPoints().stream().anyMatch(pointId -> pointId.equals(adpoint))) {
-//                for (String adId : campaign.getAds()) {
-//                    ads.add(adService.getAd(adId));
-//                }
-//            }
-//        }
-//        return ads;
-//    }
 }
